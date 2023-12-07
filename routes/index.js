@@ -9,9 +9,10 @@ router.post("/upload", async (req, res) => {
   const resultMove = await req.files.photoFromFront.mv(photoPath);
 
   if (!resultMove) {
-    const resultCloudinary = await cloudinary.uploader.upload(photoPath);
-    fs.unlinkSync(photoPath);
-    res.json({ result: true, url: resultCloudinary.secure_url });
+    // const resultCloudinary = await cloudinary.uploader.upload(photoPath);
+    // fs.unlinkSync(photoPath);
+    // res.json({ result: true, url: resultCloudinary.secure_url });
+    res.json({ result: true });
   } else {
     res.json({ result: false, error: resultMove });
   }
