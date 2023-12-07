@@ -11,15 +11,13 @@ cloudinary.config({
 });
 
 router.post("/upload", async (req, res) => {
-  const photoPath = `/tmp/${uniqid()}.jpg`;
+  const photoPath = `/tmp/photo.jpg`;
   const resultMove = await req.files.photoFromFront.mv(photoPath);
 
   if (!resultMove) {
     const resultCloudinary = await cloudinary.uploader.upload(photoPath);
     fs.unlinkSync(photoPath);
-    res.json({ result: resultCloudinary });
-
-    //res.json({ result: true, url: resultCloudinary.secure_url });
+    res.json({ result: true, url: resultCloudinary.secure_url });
   } else {
     res.json({ result: false, error: resultMove });
   }
